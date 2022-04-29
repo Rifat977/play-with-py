@@ -1,12 +1,16 @@
-import requests
-import sys
+class Car:
+    name = ""
+    color = ""
 
-img_url = sys.argv[1]
-img_name = sys.argv[2]
+    def __init__(self, name, color):
+        self.name = name
+        self.color = color
 
-response = requests.get(img_url)
+    def start(self):
+        print("Starting the engine")
 
-with open(img_name+".jpg", "wb") as f:
-    f.write(response.content)
+mycar = Car("Premio", "Nevi-Blue")
+print(mycar.name)
+print(mycar.color)
 
-
+mycar.start()
