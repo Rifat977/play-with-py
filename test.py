@@ -1,16 +1,18 @@
-class Car:
-    name = ""
-    color = ""
+import re
+import requests
 
-    def __init__(self, name, color):
-        self.name = name
-        self.color = color
+url = "https://books.toscrape.com"
 
-    def start(self):
-        print("Starting the engine")
+response = requests.get(url)
 
-mycar = Car("Premio", "Nevi-Blue")
-print(mycar.name)
-print(mycar.color)
+with open("web-page.html", "w") as f:
+    f.write(response.text)
+with open("web-page.html", "r") as fp:
+    content = fp.read()
 
-mycar.start()
+result = re.findall(r'<div class="side_categories">(.*?)</div>', content, re.M | re.DOTALL)
+
+with open("web-page.html", "w") as fa:
+    fa.write(result[0])
+
+print(len(result))
